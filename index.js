@@ -46,6 +46,17 @@ function successResponse(res, message, data, status = 200) {
 
 }
 
+
+function errorResponse(res, message, status = 500, error = null) {
+    return res.status(status).json({
+        success: false,
+        message,
+        data: null, 
+        error,
+
+    })
+}
+
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
 })
