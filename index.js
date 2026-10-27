@@ -1,5 +1,6 @@
 import express from 'express'
 import pg from 'pg'
+import Joi from 'joi'
 
 const app = express()
 const port = 3000
@@ -56,6 +57,14 @@ function errorResponse(res, message, status = 500, error = null) {
 
     })
 }
+
+
+const biodataSchema = Joi.object({
+    id: Joi.number().integer().positive(),
+    nama: Joi.string().trim().min(2).max(100).required(),
+    nim: Joi.string().trim().min(5).max(20).required(),
+    kelas: Joi.string().trim().min(1).max(20).required(),
+})
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
